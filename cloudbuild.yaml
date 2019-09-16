@@ -9,7 +9,9 @@ steps:
     - 'PG_PASS=$_PG_PASS'
     - 'SESSION_SECRET=$_SESSION_SECRET'
 - name: gcr.io/cloud-builders/gcloud
-  args: ['app', 'deploy', 'app.yaml', '--project=library-checker-project']
+  args: ['app', 'deploy', 'app.yaml', '--project=library-checker-project']  
   waitFor: ['make_secret']
+  env:
+    - 'PROJECT_ROOT=github.com/yosupo06/library-checker-frontend'
 
 timeout: 1800s
