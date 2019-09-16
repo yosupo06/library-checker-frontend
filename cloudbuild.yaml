@@ -3,7 +3,7 @@ steps:
   entrypoint: sh
   args:
     - -c
-    - './make_secret.sh && app deploy app.yaml --project=library-checker-project'
+    - './make_secret.sh && gcloud app deploy app.yaml --project=library-checker-project'
   env:
     - 'PG_HOST=$_PG_HOST'
     - 'PG_PASS=$_PG_PASS'
