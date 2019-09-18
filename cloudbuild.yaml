@@ -8,12 +8,6 @@ steps:
     - 'PG_HOST=$_PG_HOST'
     - 'PG_PASS=$_PG_PASS'
     - 'SESSION_SECRET=$_SESSION_SECRET'
-- id: go_get
-  name: gcr.io/cloud-builders/go
-  args: ['get', 'github.com/BurntSushi/toml']  
-  waitFor: ['make_secret']
-  env:
-    - 'PROJECT_ROOT=github.com/yosupo06/library-checker-frontend'
 - name: gcr.io/cloud-builders/gcloud
   args: ['app', 'deploy', 'app.yaml', '--project=library-checker-project']  
   waitFor: ['make_secret', 'go_get']
