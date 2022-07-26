@@ -35,8 +35,23 @@ const ProblemsTabs: React.FC<{
       selectedIdx === 0 ? `root` : `${categories[selectedIdx - 1].name}Title`;
   }, [selectedIdx]);
 
+  useEffect(() => {
+    document.documentElement.style.scrollPaddingTop = "48px";
+    return () => {
+      document.documentElement.style.scrollPaddingTop = "";
+    };
+  }, []);
+
   const categoriesTab = (
-    <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+    <Box
+      sx={{
+        borderBottom: 1,
+        borderColor: "divider",
+        position: "sticky",
+        top: 0,
+        background: "white",
+      }}
+    >
       <Tabs
         value={selectedIdx}
         onChange={(_, newValue: number) => {
