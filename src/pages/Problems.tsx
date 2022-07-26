@@ -3,7 +3,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import Alert from "@mui/material/Alert";
 import Link from "@mui/material/Link";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   useProblemCategories,
   useProblemList,
@@ -23,7 +23,17 @@ const ProblemsTabs: React.FC<{
   solvedStatus: { [problem: string]: "latest_ac" | "ac" };
 }> = (props) => {
   const { categories, solvedStatus } = props;
-  const [selectedIdx, setSelectedIdx] = useState(0);
+  const [selectedIdx, setSelectedIdx] = useState(() => {
+    const ind = categories.findIndex(
+      (category) => `#${category.name}Title` === window.location.hash
+    );
+    return ind + 1;
+  });
+
+  useEffect(() => {
+    window.location.hash =
+      selectedIdx === 0 ? `root` : `${categories[selectedIdx - 1].name}Title`;
+  }, [selectedIdx]);
 
   const categoriesTab = (
     <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -43,19 +53,19 @@ const ProblemsTabs: React.FC<{
     </Box>
   );
 
-  const targetCategories =
-    selectedIdx === 0 ? categories : [categories[selectedIdx - 1]];
   return (
     <Box>
       {categoriesTab}
-      {targetCategories.map((category) => (
+      {categories.map((category) => (
         <Box
           sx={{
             marginTop: 3,
             marginBottom: 3,
           }}
         >
-          <Typography variant="h4">{category.name}</Typography>
+          <Typography variant="h4" id={category.name + "Title"}>
+            {category.name}
+          </Typography>
           <ProblemList
             problems={category.problems}
             solvedStatus={solvedStatus}
