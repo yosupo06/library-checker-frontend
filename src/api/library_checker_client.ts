@@ -18,7 +18,7 @@ import {
   UserInfoResponse,
 } from "./library_checker_pb";
 
-const api_url = process.env.REACT_APP_API_URL;
+const api_url = "https://grpcweb-apiv1.yosupo.jp:443";
 
 export const authMetadata = (
   state: AuthState
@@ -37,7 +37,7 @@ export const authMetadata = (
 };
 
 const client = new LibraryCheckerServiceClient(
-  api_url ?? "https://grpcweb-apiv1.yosupo.jp:443"
+  api_url 
 );
 
 export default client;

@@ -2,7 +2,6 @@ import Toolbar from "@mui/material/Toolbar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useEffect, useReducer } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import "./App.css";
 import NavBar from "./components/NavBar";
 import Help from "./pages/Help";
 import Login from "./pages/Login";
@@ -77,7 +76,7 @@ function App(): JSX.Element {
   }, [authState]);
 
   return (
-    <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
       <CssBaseline />
       <QueryClientProvider client={queryClient}>
         <AuthContext.Provider

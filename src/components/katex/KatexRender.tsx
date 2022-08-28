@@ -1,4 +1,3 @@
-import renderMathInElement from "katex/dist/contrib/auto-render";
 import React, { useContext, useEffect, useRef } from "react";
 import { LangContext } from "../../contexts/LangContext";
 
@@ -12,6 +11,8 @@ const KatexRender: React.FC<Props> = (props) => {
 
   useEffect(() => {
     if (ref.current != null) {
+      const renderMathInElement = require('katex/contrib/auto-render');
+
       renderMathInElement(ref.current, {
         delimiters: [
           { left: "$$", right: "$$", display: true },

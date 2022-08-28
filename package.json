@@ -2,6 +2,7 @@
   "name": "library-checker-frontend",
   "version": "0.1.0",
   "private": true,
+  "main": "public/index.js",
   "dependencies": {
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",
@@ -17,10 +18,16 @@
     "@types/react-dom": "^17.0.11",
     "@types/react-router-dom": "^5.3.2",
     "@uiw/react-md-editor": "^3.17.0",
+    "antd": "4.16.13",
+    "classnames": "^2.3.1",
+    "concurrently": "6.3.0",
     "customize-cra": "^1.0.0",
+    "dayjs": "1.10.7",
+    "esbuild": "^0.14.53",
+    "esbuild-register": "^3.3.3",
     "google-protobuf": "^3.19.1",
     "grpc-web": "~1.2.1",
-    "katex": "^0.15.1",
+    "katex": "^0.16.1",
     "liquidjs": "^9.39.2",
     "monaco-editor": "^0.31.1",
     "react": "^17.0.2",
@@ -38,60 +45,17 @@
     "typescript": "^4.5.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "prettier": "prettier --write \"src/**/*.{ts,js,tsx,jsx}\"",
-    "prettier:check": "prettier --check \"src/**/*.{ts,js,tsx,jsx}\"",
-    "lint": "eslint --max-warnings 0 src --ext .ts,.js,.tsx,.jsx",
-    "lint:fix": "eslint --fix src --ext .ts,.js,.tsx,.jsx"
-  },
-  "eslintConfig": {
-    "env": {
-      "browser": true
-    },
-    "plugins": [
-      "@typescript-eslint",
-      "unused-imports"
-    ],
-    "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/recommended"
-    ],
-    "ignorePatterns": [
-      "build",
-      "src/api/Library_checkerServiceClientPb.ts",
-      "**/*_pb.js",
-      "**/*_pb.d.ts"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-      "project": [
-        "./tsconfig.json"
-      ]
-    },
-    "rules": {
-      "@typescript-eslint/no-empty-interface": "off",
-      "unused-imports/no-unused-imports": "error"
-    }
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "build": "node --require esbuild-register build.ts",
+    "build:watch": "WATCH=true npm run build",
+    "serve:local": "node --require esbuild-register local-hosting.ts",
+    "start": "concurrently \"npm run build:watch\" \"npm run serve:local\""
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "@typescript-eslint/typescript-estree": "^5.0.0",
+    "concurrently": "6.3.0",
+    "dayjs": "1.10.7",
     "eslint-plugin-unused-imports": "^2.0.0",
     "grpc_tools_node_protoc_ts": "^5.3.2",
     "grpc-tools": "^1.11.2",
