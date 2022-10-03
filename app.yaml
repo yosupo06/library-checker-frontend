@@ -16,14 +16,12 @@ handlers:
     static_files: keep_for_compatibility/uikit-icons.min.js
     upload: keep_for_compatibility/uikit-icons.min.js
 
-  - url: /static
-    static_dir: build/static
-  - url: /(.*\.(json|ico|js))$
-    static_files: build/\1
-    upload: build/.*\.(json|ico|js)$
+  - url: /(.*\.(html|css|js|json|ico))$
+    static_files: public/\1
+    upload: public/.*\.(html|css|js|json|ico)$
   
   - url: .*
-    static_files: build/index.html
-    upload: build/index.html
+    static_files: public/index.html
+    upload: public/index.html
     secure: always   
     expiration: '0s'

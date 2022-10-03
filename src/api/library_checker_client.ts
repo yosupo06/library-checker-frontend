@@ -18,7 +18,7 @@ import {
   UserInfoResponse,
 } from "./library_checker_pb";
 
-const api_url = "https://grpcweb-apiv1.yosupo.jp:443";
+const api_url = process.env.APP_ENV_API_URL ?? "https://grpcweb-apiv1.yosupo.jp:443";
 
 export const authMetadata = (
   state: AuthState

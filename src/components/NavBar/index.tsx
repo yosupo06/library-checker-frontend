@@ -12,6 +12,8 @@ import { LangContext } from "../../contexts/LangContext";
 import { styled } from "@mui/system";
 import { useUserInfo } from "../../api/library_checker_client";
 import { Box } from "@mui/material";
+import flagJA from "./flag_ja.svg";
+import flagUS from "./flag_us.svg";
 
 const NavbarLink = styled(Link)({
   color: "inherit",
@@ -43,10 +45,10 @@ const LangSelect = () => {
       }}
     >
       <MenuItem value="en">
-        <img src="/flag_us.svg" alt="us" height="15px"></img>
+        <img src={flagUS} alt="us" height="15px"></img>
       </MenuItem>
       <MenuItem value="ja">
-        <img src="/flag_ja.svg" alt="ja" height="15px"></img>
+        <img src={flagJA} alt="ja" height="15px"></img>
       </MenuItem>
     </Select>
   );

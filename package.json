@@ -23,8 +23,6 @@
     "concurrently": "6.3.0",
     "customize-cra": "^1.0.0",
     "dayjs": "1.10.7",
-    "esbuild": "^0.14.53",
-    "esbuild-register": "^3.3.3",
     "google-protobuf": "^3.19.1",
     "grpc-web": "~1.2.1",
     "katex": "^0.16.1",
@@ -51,6 +49,8 @@
     "start": "concurrently \"npm run build:watch\" \"npm run serve:local\""
   },
   "devDependencies": {
+    "esbuild": "^0.15.9",
+    "esbuild-register": "^3.3.3",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "@typescript-eslint/typescript-estree": "^5.0.0",

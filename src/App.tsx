@@ -1,3 +1,4 @@
+import "./App.css"
 import Toolbar from "@mui/material/Toolbar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useEffect, useReducer } from "react";
