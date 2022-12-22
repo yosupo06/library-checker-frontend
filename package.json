@@ -21,7 +21,7 @@
     "google-protobuf": "^3.19.1",
     "grpc-web": "~1.2.1",
     "katex": "^0.15.1",
-    "liquidjs": "^9.39.2",
+    "liquidjs": "^10.0.0",
     "monaco-editor": "^0.31.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
