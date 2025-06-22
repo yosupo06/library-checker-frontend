@@ -1,4 +1,4 @@
-import { AnyJson, JsonMap, parse } from "@iarna/toml";
+import { parse } from "@ltd/j-toml";
 
 export type ProblemInfoToml = {
   title?: string;
@@ -13,7 +13,7 @@ export type ProblemInfoToml = {
 };
 
 export const parseProblemInfoToml = (toml: string): ProblemInfoToml => {
-  const infoJsonMap = parse(toml);
+  const infoJsonMap = parse(toml, { bigint: true }) as Record<string, unknown>;
 
   const tests = (() => {
     const data = readField(infoJsonMap, "tests");
@@ -27,11 +27,12 @@ export const parseProblemInfoToml = (toml: string): ProblemInfoToml => {
       {
         if (
           typeof e === "object" &&
+          e !== null &&
           !(e instanceof Array) &&
           !(e instanceof Date)
         ) {
-          const name = readString(e, "name");
-          const number = readNumber(e, "number");
+          const name = readString(e as Record<string, unknown>, "name");
+          const number = readNumber(e as Record<string, unknown>, "number");
 
           if (name && number) {
             tests.push({ name: name, number: number });
@@ -46,12 +47,20 @@ export const parseProblemInfoToml = (toml: string): ProblemInfoToml => {
     const data = readField(infoJsonMap, "params");
     if (!data) return {};
     const params: { [key: string]: bigint } = {};
-    Object.entries(data).forEach(([key, value]) => {
+    Object.entries(data as Record<string, unknown>).forEach(([key, value]) => {
       if (typeof value === "number") {
         params[key] = BigInt(value);
       }
       if (typeof value === "bigint") {
         params[key] = value;
+      }
+      if (typeof value === "string") {
+        // Handle case where BigInt is serialized as string
+        try {
+          params[key] = BigInt(value);
+        } catch {
+          // If it's not a valid BigInt string, skip it
+        }
       }
     });
     return params;
@@ -66,12 +75,12 @@ export const parseProblemInfoToml = (toml: string): ProblemInfoToml => {
   };
 };
 
-const readField = (data: JsonMap, key: string): AnyJson | undefined => {
+const readField = (data: Record<string, unknown>, key: string): unknown => {
   if (!(key in data)) return undefined;
   return data[key];
 };
 
-const readString = (data: JsonMap, key: string): string | undefined => {
+const readString = (data: Record<string, unknown>, key: string): string | undefined => {
   const v = readField(data, key);
   if (typeof v !== "string") {
     return undefined;
@@ -79,10 +88,13 @@ const readString = (data: JsonMap, key: string): string | undefined => {
   return v;
 };
 
-const readNumber = (data: JsonMap, key: string): number | undefined => {
+const readNumber = (data: Record<string, unknown>, key: string): number | undefined => {
   const v = readField(data, key);
-  if (typeof v !== "number") {
-    return undefined;
+  if (typeof v === "number") {
+    return v;
   }
-  return v;
+  if (typeof v === "bigint") {
+    return Number(v);
+  }
+  return undefined;
 };
