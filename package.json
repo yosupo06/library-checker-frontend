@@ -74,7 +74,7 @@
     "eslint": "^9.29.0",
     "globals": "^16.2.0",
     "grpc_tools_node_protoc_ts": "^5.3.3",
-    "grpc-tools": "^1.13.0",
+    "grpc-tools": "^1.13.1",
     "prettier": "^3.6.0",
     "typescript": "^5.8.3",
     "vite": "^6.3.5",
