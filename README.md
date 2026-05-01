@@ -1,3 +1,11 @@
+# MOVED TO `library-checker-judge/frontend`
+
+This repository has moved to:
+
+https://github.com/yosupo06/library-checker-judge/tree/master/frontend
+
+Please open new issues and pull requests in `yosupo06/library-checker-judge`.
+
 # Library Checker Frontend
 
 ## Requirements
